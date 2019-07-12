@@ -1,0 +1,5 @@
+
+# absolute imports specify the complete path to the module/function/path
+
+import ecommerce.products
+product = ecommerce.products.Product()

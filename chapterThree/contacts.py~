@@ -1,0 +1,48 @@
+class ContactList(list):
+    def search(self, name):
+        '''Return all contacts that contain the search value'''
+        matching_contacts = []
+        for contact in self:
+            if name in contact.name:
+                matching_contacts.append(contact)
+        return matching_contacts
+
+
+class Contact:
+    all_contacts = ContactList()
+
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.all_contacts.append(self)
+
+
+class Supplier(Contact):
+    def order(self, order):
+        print("If this were a real system we would send "
+              "'{}' order to '{}'".format(order, self.name))
+
+
+c1 = Contact("Pat B", "pat@test.com")
+c2 = Contact("Pete B", "pete@test.com")
+c3 = Contact("Pablo B", "pablo@test.com")
+
+
+## overriding superclass methods
+
+# class Friend(Contact):
+#     def __init__(self, name, email, phone):
+#         self.name = name
+#         self.email = email
+#         self.phone = phone
+
+## instances of the Friend subclass now include a phone attribute
+## avoid duplicate code by using super() method
+
+class Friend(Contact):
+    def __init__(self, name, email, phone):
+        super().__init__(name, email)
+        self.phone = phone
+
+## by using super(), we do not have to modify code in two places when we change
+## super() returns an object of the parent class that we can modify
