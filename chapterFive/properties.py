@@ -60,3 +60,31 @@ testP = TestProperty(1, 2)
 
 # with this method, the _private attribute is still accessible directly...
 # keep this in mind
+
+# Properties in depth example:
+# property accepts four arguments (get, set, delete, docstring/description)
+
+class myClass:
+    def _getAttribute(self):
+        return self._attribute
+
+    def _setAttribute(self, value):
+        self._attribute = value
+
+    def _delAttribute(self):
+        print("You just deleted your attribute!")
+        del self._attribute
+
+    attribute = property(_getAttribute, _setAttribute, _delAttribute,
+                         "This is an attribute")
+
+aClass = myClass()
+aClass.attribute = "Patrick"
+
+# This allows us to specify more specific behaviors in case of
+# access, setting, deletion, or description
+# Usually just getter and setter are used
+
+# help(aClass)
+
+# a property is an attribute we can invoke custom actions
